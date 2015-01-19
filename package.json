@@ -1,0 +1,32 @@
+{
+  "name": "nfp_api",
+  "version": "0.1.0",
+  "description": "NFP Api for frontend website",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha -R spec test/*/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nfp-projects/nfp_api.git"
+  },
+  "keywords": [
+    "API",
+    "koa"
+  ],
+  "author": "Jónatan Nilsson",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/nfp-projects/nfp_api/issues"
+  },
+  "homepage": "https://github.com/nfp-projects/nfp_api",
+  "dependencies": {
+    "bookshelf": "^0.7.9",
+    "knex": "^0.7.3",
+    "koa": "^0.15.0",
+    "lodash": "^2.4.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0"
+  }
+}
