@@ -1,0 +1,34 @@
+{
+  "NODE_ENV": "development",
+  "server": {
+    "port": 3000
+  },
+  "knex": {
+    "client": "pg",
+    "connection": {
+      "host": "127.0.0.1",
+      "user": "nfp",
+      "password": "nfp",
+      "database": "nfp_api",
+      "charset": "utf8"
+    }
+  },
+  "bunyan": {
+    "name": "nfp_api",
+    "streams": [
+      {
+        "stream": "process.stdout",
+        "level": "debug"
+      }
+    ]
+  },
+  "type": "literal",
+  "name": "nfp_api",
+  "version": "0.1.0",
+  "description": "NFP Api for frontend website",
+  "author": "Jónatan Nilsson",
+  "license": "WTFPL",
+  "homepage": "https://github.com/nfp-projects/nfp_api",
+  "_": [],
+  "$0": "node D:\\NFP\\nfp_api\\index.js"
+}
