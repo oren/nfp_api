@@ -15,7 +15,7 @@ node --harmony index.js
 # NODE_ENV=production node --harmony index.js
 ```
 
-Running in dev mode will make nfp_api automatically scan the postgresql for required tables and/or create them if any are missing/outdated. This behavior can be overriden by adding `--skip-db` as command argument
+Running in dev mode will make nfp_api automatically scan the postgresql for required tables and/or create them if any are missing/outdated. This behavior can be overriden by adding `--skip-db` as command argument (see below).
 
 
 Config
@@ -29,17 +29,11 @@ Arguments
 
 NFP api supports number of handy command arguments:
 
-`--production`
+`--production` Runs nfp_api in production mode. This disables database integrity scan as well as enables other optimisations.
 
-Runs nfp_api in production mode. This disables database integrity scan as well as enables other optimisations.
+`--scan-db` Force scan the database for integrity even in production mode.
 
-`--scan-db`
-
-Force scan the database for integrity even in production mode.
-
-`--skip-db`
-
-Skips scanning the database in dev mode.
+`--skip-db` Skips scanning the database in dev mode.
 
 
 License
