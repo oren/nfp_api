@@ -2,6 +2,18 @@
 
 exports.up = function(knex, Promise) {
   return Promise.all([
+    knex.schema.createTable('users', function(table) {
+      table.increments();
+      table.enu('status', ['approved', 'pending', 'spam', 'trash']);
+      table.string('username');
+      table.string('name');
+      table.string('email');
+      table.string('password');
+      table.string('url');
+      table.string('ip');
+      table.string('text');
+      table.timestamps();
+    }),
     knex.schema.createTable('news', function(table) {
       table.increments();
       table.integer('user_id').references('users.id').notNullable();
@@ -65,30 +77,18 @@ exports.up = function(knex, Promise) {
       table.string('text');
       table.enu('status', ['approved', 'pending', 'spam', 'trash']);
       table.timestamps();
-    }),
-    knex.schema.createTable('users', function(table) {
-      table.increments();
-      table.enu('status', ['approved', 'pending', 'spam', 'trash']);
-      table.string('username');
-      table.string('name');
-      table.string('email');
-      table.string('password');
-      table.string('url');
-      table.string('ip');
-      table.string('text');
-      table.timestamps();
     })
   ]);
 };
 
 exports.down = function(knex, Promise) {
   return Promise.all([
+    knex.schema.dropTable('users'),
     knex.schema.dropTable('news'),
     knex.schema.dropTable('pages'),
     knex.schema.dropTable('categories'),
     knex.schema.dropTable('series'),
     knex.schema.dropTable('releases'),
-    knex.schema.dropTable('comments'),
-    knex.schema.dropTable('users')
+    knex.schema.dropTable('comments')
   ]);
 };
