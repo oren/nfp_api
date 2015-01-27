@@ -63,10 +63,9 @@ nconf.defaults({
 
 module.exports = nconf;
 
+
 //Save the current configuration into config folder for debug purposes.
-nconf.get(null, function(err, res) {
-  fs.writeFileAsync('./config/config.json.current', JSON.stringify(res, null, '  '))
-  .catch(function(e) {
-    require('./log').warn(e, 'Unable to save current configuration');
-  });
+fs.writeFileAsync('./config/config.json.current', JSON.stringify(nconf.get(), null, '  '))
+.catch(function(e) {
+  require('./log').warn(e, 'Unable to save current configuration');
 });

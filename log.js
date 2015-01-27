@@ -3,7 +3,7 @@ var fs = require('fs');
 var bunyan = require('bunyan');
 var config = require('./config');
 
-var settings = config.get('bunyan');
+var settings = _.cloneDeep(config.get('bunyan'));
 
 for (var i = 0; i < settings.streams.length; i++) {
   if (settings.streams[i].stream == 'process.stdout') {

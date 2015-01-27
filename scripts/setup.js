@@ -2,10 +2,17 @@
 
 var log = require('../log');
 var bookshelf = require('../lib/repositories/bookshelf');
-var db = require('./db');
+var _ = require('lodash');
 
 var setup = module.exports = function() {
-  return Promise.all(db(bookshelf.knex, log));
+  return bookshelf.knex.migrate.latest().then(function(result) {
+    if (result[1].length === 0) {
+      return log.info('Database is up to date');
+    }
+    for (var i = 0; i < result[1].length; i++) {
+      log.info('Applied migration from', result[1][i].substr(result[1][i].lastIndexOf('\\') + 1));
+    }
+  });
 }
 
 if(require.main === module) {
