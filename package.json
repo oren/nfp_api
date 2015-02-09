@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/nfp-projects/nfp_api",
   "dependencies": {
+    "app-root-path": "^1.0.0",
     "bcrypt": "^0.8.1",
     "bluebird": "^2.8.0",
     "bookshelf": "^0.7.9",
@@ -28,11 +29,11 @@
     "knex": "^0.7.3",
     "koa": "^0.15.0",
     "koa-bunyan": "0.0.2",
+    "koa-cors": "0.0.14",
     "koa-json-mask": "^0.3.2",
     "koa-router": "^3.8.0",
     "lodash": "^2.4.1",
-    "nconf": "^0.7.1",
-    "nconf-etcd": "git://github.com/TheThing/nconf-etcd"
+    "nconf": "^0.7.1"
   },
   "devDependencies": {
     "mocha": "^2.1.0"

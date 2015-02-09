@@ -1,10 +1,12 @@
+'use strict';
+
 // Update with your config settings.
 
 var config = require('./config');
 
-var out = {}
+var out = {};
 
-out[config.get('NODE_ENV')] = config.get('knex')
+out[config.get('NODE_ENV')] = config.get('knex');
 
 module.exports = out;
 
