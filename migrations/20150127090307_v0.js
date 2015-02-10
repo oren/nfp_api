@@ -41,6 +41,8 @@ exports.up = function(knex, Promise) {
       table.string('title');
       table.string('slug');
       table.integer('sort');
+      table.json('meta', true);
+      table.json('media', true);
       table.timestamps();
     }),
     knex.schema.createTable('series', function(table) {
@@ -83,12 +85,12 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return Promise.all([
-    knex.schema.dropTable('users'),
+    knex.schema.dropTable('comments'),
+    knex.schema.dropTable('releases'),
+    knex.schema.dropTable('series'),
+    knex.schema.dropTable('categories'),
     knex.schema.dropTable('news'),
     knex.schema.dropTable('pages'),
-    knex.schema.dropTable('categories'),
-    knex.schema.dropTable('series'),
-    knex.schema.dropTable('releases'),
-    knex.schema.dropTable('comments')
+    knex.schema.dropTable('users'),
   ]);
 };
