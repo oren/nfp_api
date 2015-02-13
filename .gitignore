@@ -26,3 +26,8 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+
+# Docker
+.bash_history
+.node-gyp/
+.npm/
