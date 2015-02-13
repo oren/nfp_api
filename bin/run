@@ -1,2 +1,4 @@
-docker run --rm -it -p 3000:3000 -v $(pwd):/home/developer iojs /bin/bash
+#!/bin/bash
+
+docker run --rm -it -p 3000:3000 --link nfp-postgres:postgres -v $(pwd):/home/developer iojs /bin/bash
 

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 docker build -t iojs .
-docker build -t iojs .
+docker run --name nfp-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
 
