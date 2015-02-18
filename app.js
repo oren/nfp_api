@@ -27,8 +27,7 @@ app.use(koaLogger.requestLogger({
 
 app.use(cors({
   origin: true,
-  credentials: true,
-  maxAge: 60 * 60 * 24 * 14 //14 days
+  credentials: true
 }));
 app.use(jwt({
   secret: config.get('jwt:secret'),
