@@ -22,6 +22,12 @@
       }
     ]
   },
+  "jwt": {
+    "secret": "this-is-my-secret",
+    "options": {
+      "expiresInMinutes": 20160
+    }
+  },
   "type": "literal",
   "name": "nfp_api",
   "version": "0.1.0",
