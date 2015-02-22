@@ -1,33 +1,45 @@
 'use strict';
 
-//Our koa app
 var koa = require('koa');
-var app = koa();
-
-var config = require('./lib/config');
-
-//Logger
-var logger = require('./lib/log');
-
-//Middlewares
 var cors = require('koa-cors');
-var koaLogger = require('koa-bunyan');
+var koaLogger = require('koa-bunyan-logger');
 var mask = require('koa-json-mask');
 var router = require('koa-router');
-app.use(koaLogger(logger, {
-  level: 'debug',
-  timeLimit: '100'
+var koaBody = require('koa-better-body')({fieldsKey: false});
+var jwt = require('koa-jwt');
+
+var config = require('./lib/config');
+var log = require('./lib/log');
+var error = require('./lib/helpers/error');
+
+//Our koa app
+var app = koa();
+
+//Middlewares
+app.use(error.errorHandler);
+app.use(koaLogger(log));
+app.use(koaLogger.requestIdContext({header: 'Request-Id'}));
+app.use(koaLogger.requestLogger({
+  updateLogFields: function(fields) {
+    return {duration: fields.duration};
+  }
 }));
+
 app.use(cors({
   origin: true,
   credentials: true
+}));
+app.use(jwt({
+  secret: config.get('jwt:secret'),
+  passthrough: true
 }));
 app.use(router(app));
 app.use(mask());
 
 //Routes
 var authentication = require('./lib/request-handlers/authentication');
-app.post('/authenticate', authentication.authenticate);
+var authenticated = authentication.authenticated;
+app.post('/authenticate', koaBody, authentication.authenticate);
 
 var category = require('./lib/request-handlers/category');
 app.get('/categories', category.categories);
@@ -35,18 +47,25 @@ app.get('/categories', category.categories);
 var nav = require('./lib/request-handlers/nav');
 app.get('/nav', nav.getNav);
 
+var profile = require('./lib/request-handlers/profile');
+app.get('/profile', authenticated, profile.getProfile);
+app.post('/profile', authenticated, koaBody, profile.updateProfile);
+app.post('/profile/forgot', koaBody, profile.forgotPassword);
+app.post('/profile/verify', koaBody, profile.verify);
+app.post('/profile/finish', koaBody, profile.finish);
+app.post('/profile/signup', koaBody, profile.signup);
+
+
 var releases = require('./lib/request-handlers/release');
 app.get('/', releases.hello);
 
 
 //Error logging
 app.on('error', function(err) {
-  if (err.message !== 'Unauthorized') {
-    logger.error(err, 'Unknown error occured');
-  }
+  log.error(err, 'Unknown error occured');
 });
 
 
 //Run the server
 app.listen(config.get('server:port'));
-logger.info('Running api server on port', config.get('server:port'));
+log.info('Running api server on port', config.get('server:port'));
