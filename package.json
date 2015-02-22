@@ -34,11 +34,12 @@
     "koa-better-body": "^1.0.17",
     "koa-bunyan": "0.0.2",
     "koa-bunyan-logger": "^1.2.0",
-    "koa-cors": "0.0.14",
+    "koa-cors": "usecanvas/koa-cors",
     "koa-json-mask": "^0.3.2",
     "koa-jwt": "^0.1.7",
     "koa-router": "^3.8.0",
     "lodash": "^2.4.1",
+    "mailgun-js": "^0.6.8",
     "nconf": "^0.7.1",
     "pg": "^4.2.0"
   },

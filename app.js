@@ -50,6 +50,11 @@ app.get('/nav', nav.getNav);
 var profile = require('./lib/request-handlers/profile');
 app.get('/profile', authenticated, profile.getProfile);
 app.post('/profile', authenticated, koaBody, profile.updateProfile);
+app.post('/profile/forgot', koaBody, profile.forgotPassword);
+app.post('/profile/verify', koaBody, profile.verify);
+app.post('/profile/finish', koaBody, profile.finish);
+app.post('/profile/signup', koaBody, profile.signup);
+
 
 var releases = require('./lib/request-handlers/release');
 app.get('/', releases.hello);
